@@ -1,14 +1,30 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Home Page</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <audio-track #audio *ngFor="let track of myTracks" [track]="track" (onFinish)="onTrackFinished($event)">
+    <ion-card>
+
+      <ion-card-header>
+        <div class="row">
+          <div class="col col-40">{{audio.title}} </div>
+          <div class="col"> {{track.airDate}}</div>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{audio.artist}}
+        <br>
+        <audio-track-play dark [audioTrack]="audio">
+          <ion-spinner></ion-spinner>
+        </audio-track-play>
+        <ion-icon name="download" style="font-size:25px; vertical-align:-35%" (tap)="start_download(track.src)"></ion-icon>
+
+        <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'hidden'}"></audio-track-progress-bar>
+      </ion-card-content>
+    </ion-card>
+  </audio-track>
 </ion-content>

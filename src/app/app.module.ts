@@ -9,7 +9,14 @@ import { HomePage } from '../pages/home/home';
 import { DataProvider } from '../providers/data/data';
 import { HttpModule } from "@angular/http";
 import { IonicStorageModule } from "@ionic/storage";
+import { IonicAudioModule, AudioProvider, WebAudioProvider, defaultAudioProviderFactory, CordovaMediaProvider } from 'ionic-audio';
 
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+
+export function myCustomAudioProviderFactory() {
+  return (window.hasOwnProperty('cordova')) ? new CordovaMediaProvider() : new WebAudioProvider();
+}
 @NgModule({
   declarations: [
     MyApp,
@@ -19,7 +26,8 @@ import { IonicStorageModule } from "@ionic/storage";
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicAudioModule.forRoot(defaultAudioProviderFactory)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,7 +38,9 @@ import { IonicStorageModule } from "@ionic/storage";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider
+    DataProvider,
+    FileTransfer,
+    File
   ]
 })
 export class AppModule {}
