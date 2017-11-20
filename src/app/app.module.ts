@@ -13,6 +13,7 @@ import { IonicAudioModule, AudioProvider, WebAudioProvider, defaultAudioProvider
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 export function myCustomAudioProviderFactory() {
   return (window.hasOwnProperty('cordova')) ? new CordovaMediaProvider() : new WebAudioProvider();
@@ -40,7 +41,8 @@ export function myCustomAudioProviderFactory() {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
     FileTransfer,
-    File
+    File,
+    SocialSharing
   ]
 })
 export class AppModule {}

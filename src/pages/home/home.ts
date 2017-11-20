@@ -6,6 +6,7 @@ import { AudioProvider } from 'ionic-audio';
 
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { SocialSharing} from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-home',
@@ -22,9 +23,9 @@ export class HomePage {
 
 
 
-  constructor(public navCtrl: NavController, public http: Http, private _audioProvider: AudioProvider, private transfer: FileTransfer, private file: File) {
+  constructor(public navCtrl: NavController, public http: Http, private _audioProvider: AudioProvider, private transfer: FileTransfer, private file: File, public socialSharing: SocialSharing) {
     //this.http.get('http://kmclearvoice.com/rss2json/feed2.json').map(res => res.json()).subscribe(data => {
-    this.http.get('https://kmclearvoice.com/rss2json/index.php?feed=http://ptmin.podbean.com/feed/').map(res => res.json()).subscribe(data => {
+    this.http.get('http://www.kmclearvoice.com/lifepod/json/lifepod1.json').map(res => res.json()).subscribe(data => {
 
       for (let ind_item of data.item) { //loop through feed items, push to the new array
        console.log("first..." + ind_item.link )
@@ -139,4 +140,14 @@ export class HomePage {
           });
 
   }
+
+  shareApp(): void {
+    
+       this.socialSharing.share('Download Here','App', null,'http://www.kmclearvoice.com/lifepod/apk/lifepod.apk').then(() => {
+          // Successfile:///data/app/com.yourapppackagename/base.apk
+          console.log('success!');
+        }).catch(() => {
+            // Error!
+          });
+        }
 }
