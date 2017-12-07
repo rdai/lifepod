@@ -7,6 +7,7 @@ import { AudioProvider } from 'ionic-audio';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { SocialSharing} from '@ionic-native/social-sharing';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,7 +23,8 @@ export class HomePage {
 
 
 
-  constructor(public navCtrl: NavController, public http: Http, private _audioProvider: AudioProvider, private transfer: FileTransfer, private file: File, public socialSharing: SocialSharing) {
+  constructor(public navCtrl: NavController, public http: Http, private _audioProvider: AudioProvider, 
+    private transfer: FileTransfer, private file: File, public socialSharing: SocialSharing, public firebaseAnalytics: FirebaseAnalytics) {
     //this.http.get('http://kmclearvoice.com/rss2json/feed2.json').map(res => res.json()).subscribe(data => {
     // this.http.get('http://www.kmclearvoice.com/lifepod/json/lifepod1.json').map(res => res.json()).subscribe(data => {
     this.http.get('https://www.surehope.net/lifepod/json/hmongradio.json').map(res => res.json()).subscribe(data => {
